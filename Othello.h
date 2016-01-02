@@ -2,10 +2,11 @@
 #define OTHELLO_H
 
 #include <QMainWindow>
-#include <QPainter>
 #include <QVBoxLayout>
+#include <QLabel>
+#include "Board.h"
 
-class Othello : public QMainWindow
+class Othello : public QWidget
 {
     Q_OBJECT
     
@@ -14,17 +15,9 @@ public:
     ~Othello();
 
 private:
-    // Graphics
-    QPen pen_;
-    QBrush brush_;
-    //QPixmap pixmap_;
+    Board* board_;
+    QLabel* test_;
 
-    // Game vars
-    unsigned short int board_size_ = 8;
-
-protected:
-    // Graphics
-    void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
 };
 
 #endif // OTHELLO_H

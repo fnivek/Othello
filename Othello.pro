@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        Othello.cpp
+        Othello.cpp \
+    Board.cpp
 
-HEADERS  += Othello.h
+HEADERS  += Othello.h \
+    Board.h
 
 CONFIG += c++11

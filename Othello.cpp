@@ -1,15 +1,15 @@
 #include "Othello.h"
 
 Othello::Othello(QWidget *parent)
-    : QMainWindow(parent)
+    : QWidget(parent),
+      board_(new Board),
+      test_(new QLabel)
 {
     QVBoxLayout *layout = new QVBoxLayout;
-    //layout->addWidget();
-
+    layout->addWidget(board_);
+    test_->setText("Test");
+    layout->addWidget(test_);
     setLayout(layout);
-
-    setBackgroundRole(QPalette::Base);
-    setAutoFillBackground(true);
 }
 
 Othello::~Othello()
@@ -17,33 +17,3 @@ Othello::~Othello()
     
 }
 
-void Othello::paintEvent(QPaintEvent* event)
-{
-    QPainter painter(this);
-
-    // Draw backround
-    painter.setBrush(QBrush(Qt::green));
-    painter.drawRect(QRect(0, 0, width() - 1, height() - 1));
-
-    // Draw lines
-    painter.setPen(QPen());
-    QVector<QLine> lines((board_size_ - 1) * 2);
-
-    float x_diff = width() / board_size_;
-    float x = x_diff;
-    for(int iii = 0; iii < (board_size_ - 1); ++iii)
-    {
-        lines.append(QLine(x, 0, x, (height() - 1)));
-        x += x_diff;
-    }
-
-    float y_diff = height() / board_size_;
-    float y = y_diff;
-    for(int iii = 0; iii < (board_size_ - 1); ++iii)
-    {
-        lines.append(QLine(0, y, (width() - 1), y));
-        y += y_diff;
-    }
-
-    painter.drawLines(lines);
-}
