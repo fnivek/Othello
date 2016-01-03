@@ -16,7 +16,6 @@ public:
 
 private:
     Board* board_;
-    QLabel* test_;
 
 };
 
