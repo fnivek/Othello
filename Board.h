@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
+
 #include <utility>
+
+#include "GameState.h"
 
 class Board : public QWidget
 {
@@ -21,6 +24,9 @@ public:
     // Set board size
     void SetBoardSize(unsigned short size);
 
+    // Model
+    void ModelUpdated(GameState gs);
+
 private:
     // Graphics
     void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
@@ -29,13 +35,12 @@ private:
     // Board vars
     unsigned short int board_size_ = 8;
     view_type view_ = PAINTER;
+    GameState gs_;
 
     // Control
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     std::pair<unsigned short, unsigned short> GetCell(int x, int y);
     
-signals:
-    //void
     
 public slots:
     

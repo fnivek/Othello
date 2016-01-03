@@ -52,13 +52,23 @@ void Board::RenderPainter()
         y += y_diff;
     }
 
-    // Draw Game pieces
-    //QRectF rec(x_diff * temp_.first, y_diff * temp_.second, x_diff, y_diff);
-    //painter.setBrush(QBrush(Qt::white));
-    //painter.drawEllipse(rec);
-
-
     painter.drawLines(lines);
+
+    // Draw Game pieces
+    for(auto p : gs_.pieces_)
+    {
+        QRectF rec(x_diff * p.row_, y_diff * p.column_, x_diff, y_diff);
+        if(p.type_ == Cell::WHITE)
+        {
+            painter.setBrush(QBrush(Qt::white));
+        }
+        else
+        {
+            painter.setBrush(QBrush(Qt::black));
+        }
+
+        painter.drawEllipse(rec);
+    }
 }
 
 std::pair<unsigned short, unsigned short> Board::GetCell(int x, int y)
@@ -84,4 +94,10 @@ void Board::SetBoardSize(unsigned short size)
         return;
 
     board_size_ = size;
+}
+
+void Board::ModelUpdated(GameState gs)
+{
+    gs_ = gs;
+    update();
 }

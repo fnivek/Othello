@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         Othello.cpp \
     Board.cpp \
-    Cell.cpp
+    Cell.cpp \
+    GameState.cpp
 
 HEADERS  += Othello.h \
     Board.h \
-    Cell.h
+    Cell.h \
+    GameState.h
 
 CONFIG += c++11

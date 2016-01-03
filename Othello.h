@@ -10,6 +10,7 @@
 
 #include "Board.h"
 #include "Cell.h"
+#include "GameState.h"
 
 using namespace std;
 
@@ -28,6 +29,10 @@ private:
     vector<vector<Cell::cell_type>> cells_;
 
     void InitilizeCells();
+
+    void UpdateBoard();
+
+    bool player_ = GameState::WHITE_PLAYER;
 
 
 };

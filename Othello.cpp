@@ -11,6 +11,9 @@ Othello::Othello(QWidget *parent)
 
     // Set up game
     InitilizeCells();
+
+    // Send state to board
+    UpdateBoard();
 }
 
 Othello::~Othello()
@@ -25,7 +28,7 @@ void Othello::InitilizeCells()
     for(auto&& row : cells_)
     {
         row = vector<Cell::cell_type>(board_size_);
-        for(auto cell : row)
+        for(auto&& cell : row)
         {
             cell = Cell::EMPTY;
         }
@@ -38,5 +41,23 @@ void Othello::InitilizeCells()
     cells_[p][p+1] =    Cell::BLACK;
     cells_[p+1][p+1] =  Cell::WHITE;
 
+}
+
+void Othello::UpdateBoard()
+{
+    // Get non-empty cells
+    vector<Cell> pieces;
+    for(int row = 0; row < board_size_; ++row)
+    {
+        for(int column = 0; column < board_size_; ++column)
+        {
+            auto cell_type = cells_[row][column];
+            if(cell_type == Cell::EMPTY) continue;
+            Cell cell(row, column, cell_type);
+            pieces.push_back(cell);
+        }
+    }
+
+    board_->ModelUpdated(GameState(pieces, player_));
 }
 
