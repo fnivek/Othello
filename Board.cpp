@@ -7,7 +7,7 @@ Board::Board(QWidget *parent) :
     setAutoFillBackground(true);
 }
 
-void Board::paintEvent(QPaintEvent* event)
+void Board::paintEvent(QPaintEvent*)
 {
     switch (view_)
     {
@@ -53,9 +53,9 @@ void Board::RenderPainter()
     }
 
     // Draw Game pieces
-    QRectF rec(x_diff * temp_.first, y_diff * temp_.second, x_diff, y_diff);
-    painter.setBrush(QBrush(Qt::white));
-    painter.drawEllipse(rec);
+    //QRectF rec(x_diff * temp_.first, y_diff * temp_.second, x_diff, y_diff);
+    //painter.setBrush(QBrush(Qt::white));
+    //painter.drawEllipse(rec);
 
 
     painter.drawLines(lines);
@@ -74,7 +74,14 @@ void Board::mousePressEvent(QMouseEvent* event)
     if(event->button() != Qt::LeftButton)
         return;
 
-    temp_ = GetCell(event->x(), event->y());
-
     update();
+}
+
+
+void Board::SetBoardSize(unsigned short size)
+{
+    if((size % 2) || (size < 4))
+        return;
+
+    board_size_ = size;
 }

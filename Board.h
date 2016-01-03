@@ -18,11 +18,13 @@ public:
     // Set view
     void SetView(view_type v);
 
+    // Set board size
+    void SetBoardSize(unsigned short size);
+
 private:
     // Graphics
     void paintEvent(QPaintEvent *) Q_DECL_OVERRIDE;
     void RenderPainter();
-    std::pair<unsigned short, unsigned short> temp_ = std::pair<unsigned short, unsigned short>(0,0);
 
     // Board vars
     unsigned short int board_size_ = 8;
@@ -33,6 +35,7 @@ private:
     std::pair<unsigned short, unsigned short> GetCell(int x, int y);
     
 signals:
+    //void
     
 public slots:
     
