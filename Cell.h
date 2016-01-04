@@ -29,6 +29,7 @@ typedef map<cellpos, Cell> cellmap;
 typedef array<short, 2> celldir;
 
 void operator+=(cellpos& pos, const celldir& dir);
+cellpos operator+(const cellpos& pos, const celldir& dir);
 
 
 #endif // CELL_H

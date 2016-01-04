@@ -84,8 +84,7 @@ cellposset Othello::GetPlayableCells(bool player)
         bool surrounded = true;
         for(auto dir : CARDINAL_DIRS)
         {
-            cellpos new_pos = pos;
-            new_pos += dir;
+            cellpos new_pos = pos + dir;
 
             // Check if new pos is on board
             if(!isCellposOnBoard(new_pos))
@@ -126,14 +125,7 @@ void Othello::PlacePiece(cellpos pos)
     pieces_.insert({pos, Cell(player_)});
 
     // Flip pieces
-    for(auto dir : ALL_DIRS)
-    {
-        if(isValidDir(pos, dir, player_))
-        {
-            cellpos new_pos = pos;
-            //new_pos
-        }
-    }
+    FlipPieces(pos, player_);
 
     // Recalulate playable cells
     playable_cells_ = GetPlayableCells(!player_);
@@ -204,4 +196,26 @@ bool Othello::isCellposOnBoard(cellpos pos)
         return false;
     else
         return true;
+}
+
+void Othello::FlipPieces(cellpos pos, bool player)
+{
+    for(auto dir : ALL_DIRS)
+    {
+        if(isValidDir(pos, dir, player))
+        {
+            cellpos new_pos = pos + dir;
+            while(true)
+            {
+                auto it = pieces_.find(new_pos);
+                if(it->second.type_ == player)
+                {
+                    break;
+                }
+
+                it->second.type_ = player;
+                new_pos += dir;
+            }
+        }
+    }
 }

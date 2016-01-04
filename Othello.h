@@ -48,6 +48,8 @@ private:
 
     bool isCellposOnBoard(cellpos pos);
 
+    void FlipPieces(cellpos pos, bool player);
+
 
 public slots:
     void BoardClicked(cellpos pos);
