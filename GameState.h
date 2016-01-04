@@ -18,9 +18,12 @@ public:
     void SetCells(cellmap pieces);
     void SetPlayer(bool player);
 
+    bool isGameOver();
+
     cellmap pieces_;
     cellposset playablecells_;
     bool player_ = WHITE_PLAYER;
+
 };
 
 #endif // GAMESTATE_H

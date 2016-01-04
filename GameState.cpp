@@ -20,3 +20,8 @@ void GameState::SetPlayer(bool player)
 {
     player_ = player;
 }
+
+bool GameState::isGameOver()
+{
+    return !(playablecells_.size());
+}

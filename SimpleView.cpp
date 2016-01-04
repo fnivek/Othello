@@ -23,5 +23,11 @@ void SimpleView::ModelUpdated(GameState gs)
         game_info_->setText("White players turn");
     else
         game_info_->setText("Black players turn");
+
+    // Check if gameover
+    if(gs_.isGameOver())
+    {
+        game_info_->setText("Game Over");
+    }
     update();
 }

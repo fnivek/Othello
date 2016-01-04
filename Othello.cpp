@@ -128,13 +128,23 @@ void Othello::PlacePiece(cellpos pos)
     FlipPieces(pos, player_);
 
     // Recalulate playable cells
-    playable_cells_ = GetPlayableCells(!player_);
+    auto cells = GetPlayableCells(!player_);
 
     // Change player if there are vaild moves
-    if(playable_cells_.size())
+    if(cells.size())
     {
         player_ = !player_;
     }
+    else
+    {
+        cells = GetPlayableCells(player_);
+        if(!cells.size())
+        {
+            // Gameover!
+        }
+    }
+
+    playable_cells_ = cells;
 
     // Update game board
     UpdateBoard();
