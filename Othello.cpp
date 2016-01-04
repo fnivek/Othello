@@ -1,11 +1,11 @@
 #include "Othello.h"
 
-const array<array<short, 2>, 4> Othello::CARDINAL_DIRS{{
+const array<celldir, 4> Othello::CARDINAL_DIRS{{
         {{-1, 0}}, {{ 0,-1}},
         {{ 1, 0}}, {{ 0, 1}}
                                                          }};
 
-const array<array<short, 2>, 8> Othello::ALL_DIRS{{
+const array<celldir, 8> Othello::ALL_DIRS{{
         {{1, 0}}, {{1, 1}}, {{0, 1}}, {{-1, 1}},
         {{-1, 0}}, {{-1, -1}}, {{0, -1}}, {{1, -1}}
                                                 }};
@@ -85,8 +85,7 @@ cellposset Othello::GetPlayableCells(bool player)
         for(auto dir : CARDINAL_DIRS)
         {
             cellpos new_pos = pos;
-            new_pos.first += dir[0];
-            new_pos.second += dir[1];
+            new_pos += dir;
 
             // Check if new pos is on board
             if(!isCellposOnBoard(new_pos))
@@ -126,8 +125,15 @@ void Othello::PlacePiece(cellpos pos)
     // Place the piece
     pieces_.insert({pos, Cell(player_)});
 
-    // TODO: Flip pieces
-    //...
+    // Flip pieces
+    for(auto dir : ALL_DIRS)
+    {
+        if(isValidDir(pos, dir, player_))
+        {
+            cellpos new_pos = pos;
+            //new_pos
+        }
+    }
 
     // Recalulate playable cells
     playable_cells_ = GetPlayableCells(!player_);
@@ -142,10 +148,9 @@ void Othello::PlacePiece(cellpos pos)
     UpdateBoard();
 }
 
-bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
+bool Othello::isValidDir(cellpos pos, celldir dir, bool player)
 {
-    pos.first += dir[0];
-    pos.second += dir[1];
+    pos += dir;
 
     // Check that we didn't go off the board
     if(!isCellposOnBoard(pos))
@@ -167,8 +172,7 @@ bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
     }
 
     // Check if there is another of players pieces after the !players piece
-    pos.first += dir[0];
-    pos.second +=dir[1];
+    pos += dir;
 
     while(isCellposOnBoard(pos))
     {
@@ -187,8 +191,7 @@ bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
         }
 
         // Increment
-        pos.first += dir[0];
-        pos.second +=dir[1];
+        pos += dir;
     }
 
     // Cell is off board

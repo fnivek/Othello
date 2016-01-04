@@ -3,9 +3,13 @@
 
 #include <map>
 #include <set>
+#include <array>
 #include <utility>
 
 using namespace std;
+
+typedef pair<unsigned short, unsigned short> cellpos;
+typedef set<cellpos> cellposset;
 
 
 struct Cell
@@ -21,9 +25,10 @@ public:
 
 };
 
-typedef pair<unsigned short, unsigned short> cellpos;
-typedef set<cellpos> cellposset;
 typedef map<cellpos, Cell> cellmap;
+typedef array<short, 2> celldir;
+
+void operator+=(cellpos& pos, const celldir& dir);
 
 
 #endif // CELL_H

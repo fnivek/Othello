@@ -32,9 +32,9 @@ private:
 
     bool player_ = GameState::BLACK_PLAYER;
 
-    static const array<array<short, 2>, 4> CARDINAL_DIRS;
+    static const array<celldir, 4> CARDINAL_DIRS;
 
-    static const array<array<short, 2>, 8> ALL_DIRS;
+    static const array<celldir, 8> ALL_DIRS;
 
     void InitilizeCells();
 
@@ -44,7 +44,7 @@ private:
 
     void PlacePiece(cellpos pos);
 
-    bool isValidDir(cellpos pos, array<short, 2> dir, bool player);
+    bool isValidDir(cellpos pos, celldir dir, bool player);
 
     bool isCellposOnBoard(cellpos pos);
 
