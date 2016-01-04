@@ -12,11 +12,11 @@ const array<celldir, 8> Othello::ALL_DIRS{{
 
 Othello::Othello(QWidget *parent)
     : QWidget(parent),
-      board_(new Board)
+      view_(new SimpleView)
 {
     // Place Widgets in a layout
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(board_);
+    layout->addWidget(view_);
     setLayout(layout);
 
     // Set up game
@@ -28,7 +28,7 @@ Othello::Othello(QWidget *parent)
     UpdateBoard();
 
     // Connect signals and slots
-    connect(board_, SIGNAL(BoardClicked(cellpos)), this, SLOT(BoardClicked(cellpos)));
+    connect(view_, SIGNAL(BoardClicked(cellpos)), this, SLOT(BoardClicked(cellpos)));
 }
 
 Othello::~Othello()
@@ -48,7 +48,7 @@ void Othello::InitilizeCells()
 
 void Othello::UpdateBoard()
 {
-    board_->ModelUpdated(GameState(pieces_, playable_cells_, player_));
+    view_->ModelUpdated(GameState(pieces_, playable_cells_, player_));
 }
 
 void Othello::BoardClicked(cellpos pos)

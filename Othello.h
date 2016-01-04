@@ -3,12 +3,11 @@
 
 #include <QMainWindow>
 #include <QVBoxLayout>
-#include <QLabel>
 
 #include <set>
 #include <array>
 
-#include "Board.h"
+#include "SimpleView.h"
 #include "Cell.h"
 #include "GameState.h"
 
@@ -24,7 +23,7 @@ public:
 
 private:
     unsigned short board_size_ = 8;
-    Board* board_;
+    SimpleView* view_;
 
     cellmap pieces_;
 
