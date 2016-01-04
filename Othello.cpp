@@ -14,6 +14,9 @@ Othello::Othello(QWidget *parent)
 
     // Send state to board
     UpdateBoard();
+
+    // Connect signals and slots
+    connect(board_, SIGNAL(BoardClicked(cellpos)), this, SLOT(BoardClicked(cellpos)));
 }
 
 Othello::~Othello()
@@ -36,3 +39,11 @@ void Othello::UpdateBoard()
     board_->ModelUpdated(GameState(cells_, player_));
 }
 
+void Othello::BoardClicked(cellpos pos)
+{
+    cells_.insert({{pos.first, pos.second}, Cell{player_}});
+
+    player_ = !player_;
+
+    UpdateBoard();
+}

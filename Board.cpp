@@ -57,7 +57,7 @@ void Board::RenderPainter()
     // Draw Game cells
     for(auto p : gs_.cells_)
     {
-        QRectF rec(x_diff * p.first.first, y_diff * p.first.second, x_diff, y_diff);
+        QRectF rec(x_diff * p.first.second, y_diff * p.first.first, x_diff, y_diff);
         if(p.second.type_ == Cell::WHITE)
         {
             painter.setBrush(QBrush(Qt::white));
@@ -71,11 +71,11 @@ void Board::RenderPainter()
     }
 }
 
-std::pair<unsigned short, unsigned short> Board::GetCell(int x, int y)
+cellpos Board::GetCell(int x, int y)
 {
-    x = x * board_size_ / width();
-    y = y * board_size_ / height();
-    return std::pair<unsigned short, unsigned short>(x, y);
+    unsigned short column = x * board_size_ / width();
+    unsigned short row = y * board_size_ / height();
+    return cellpos(row, column);
 }
 
 
@@ -84,7 +84,8 @@ void Board::mousePressEvent(QMouseEvent* event)
     if(event->button() != Qt::LeftButton)
         return;
 
-    update();
+    // Get and send cell to controller
+    emit BoardClicked(GetCell(event->x(), event->y()));
 }
 
 

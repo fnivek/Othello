@@ -32,7 +32,10 @@ private:
 
     void UpdateBoard();
 
-    bool player_ = GameState::WHITE_PLAYER;
+    bool player_ = GameState::BLACK_PLAYER;
+
+public slots:
+    void BoardClicked(cellpos pos);
 
 
 };

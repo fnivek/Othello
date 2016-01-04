@@ -5,9 +5,8 @@
 #include <QPainter>
 #include <QMouseEvent>
 
-#include <utility>
-
 #include "GameState.h"
+#include "Cell.h"
 
 class Board : public QWidget
 {
@@ -39,7 +38,10 @@ private:
 
     // Control
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    std::pair<unsigned short, unsigned short> GetCell(int x, int y);
+    cellpos GetCell(int x, int y);
+
+signals:
+    void BoardClicked(cellpos);
     
     
 public slots:
