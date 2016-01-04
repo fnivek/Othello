@@ -7,7 +7,6 @@
 
 #include <set>
 #include <array>
-#include <iostream>
 
 #include "Board.h"
 #include "Cell.h"

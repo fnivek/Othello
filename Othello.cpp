@@ -61,26 +61,22 @@ void Othello::BoardClicked(cellpos pos)
 
 cellposset Othello::GetPlayableCells(bool player)
 {
-    cout << "GetPlayableCells\n";
     cellposset cells = cellposset();
     // Itterate through all pieces_
     for(auto&& p : pieces_)
     {
         auto&& piece = p.second;
         auto pos = p.first;
-        cout << "Check " << pos.first << ',' << pos.second << endl;
 
         // If all four adjacent sides are full move on
         if(piece.surrounded_)
         {
-            cout << "Piece surrounded\n";
             continue;
         }
 
         // Check if piece is player color
         if(piece.type_ == player)
         {
-            cout << "Same color\n";
             continue;
         }
 
@@ -91,19 +87,16 @@ cellposset Othello::GetPlayableCells(bool player)
             cellpos new_pos = pos;
             new_pos.first += dir[0];
             new_pos.second += dir[1];
-            cout << "Check niebour" << new_pos.first << ',' << new_pos.second << endl;
 
             // Check if new pos is on board
             if(!isCellposOnBoard(new_pos))
             {
-                cout << "Off board\n";
                 continue;
             }
 
             // if new pos is ocupied move on
             if(pieces_.count(new_pos))
             {
-                cout << "Piece occupied\n";
                 continue;
             }
 
@@ -115,12 +108,9 @@ cellposset Othello::GetPlayableCells(bool player)
                 if(isValidDir(new_pos, dir2, player))
                 {
                     cells.insert(new_pos);
-                    cout << "Niebour" << new_pos.first << ',' << new_pos.second << " is vaild\n";
                     break;
                 }
             }
-
-            cout << "No valid dirs\n";
 
         }
 
@@ -154,16 +144,12 @@ void Othello::PlacePiece(cellpos pos)
 
 bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
 {
-    cout << "Check if dir" << dir[0] << ',' << dir[1] << " is valid for" << pos.first << ',' << pos.second << endl;
     pos.first += dir[0];
     pos.second += dir[1];
-
-    cout << "Check " << pos.first << ',' << pos.second << endl;
 
     // Check that we didn't go off the board
     if(!isCellposOnBoard(pos))
     {
-        cout << "Cell is off board\n";
         return false;
     }
 
@@ -171,21 +157,18 @@ bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
     auto piece = pieces_.find(pos);
     if(piece == pieces_.end())
     {
-        cout << "Cell is empty\n";
         return false;
     }
 
     // Check if same color
     if(piece->second.type_ == player)
     {
-        cout << "Cell is same color\n";
         return false;
     }
 
     // Check if there is another of players pieces after the !players piece
     pos.first += dir[0];
     pos.second +=dir[1];
-    cout << "Check " << pos.first << ',' << pos.second << endl;
 
     while(isCellposOnBoard(pos))
     {
@@ -194,25 +177,21 @@ bool Othello::isValidDir(cellpos pos, array<short, 2> dir, bool player)
         auto piece = pieces_.find(pos);
         if(piece == pieces_.end())
         {
-            cout << "Cell is empty\n";
             return false;
         }
 
         // If same color return true
         if(piece->second.type_ == player)
         {
-            cout << "Valid direction\n";
             return true;
         }
 
         // Increment
         pos.first += dir[0];
         pos.second +=dir[1];
-        cout << "Check " << pos.first << ',' << pos.second << endl;
     }
 
     // Cell is off board
-    cout << "Cell is off board\n";
     return false;
 }
 
