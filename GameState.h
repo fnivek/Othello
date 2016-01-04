@@ -1,7 +1,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <vector>
+#include <map>
 
 #include "Cell.h"
 
@@ -15,12 +15,12 @@ public:
 
 public:
     GameState();
-    GameState(vector<Cell>& pieces, bool player);
+    GameState(cellmap cells, bool player);
 
-    void SetPieces(vector<Cell>& pieces);
+    void SetCells(cellmap cells);
     void SetPlayer(bool player);
 
-    vector<Cell> pieces_;
+    cellmap cells_;
     bool player_ = WHITE_PLAYER;
 };
 

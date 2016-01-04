@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-#include <vector>
+#include <set>
 #include <iostream>
 
 #include "Board.h"
@@ -26,7 +26,7 @@ private:
     unsigned short board_size_ = 8;
     Board* board_;
 
-    vector<vector<Cell::cell_type>> cells_;
+    cellmap cells_;
 
     void InitilizeCells();
 

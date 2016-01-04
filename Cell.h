@@ -1,16 +1,27 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include <map>
+#include <utility>
+
+using namespace std;
+
+
 struct Cell
 {
 public:
-    enum cell_type {WHITE, BLACK, EMPTY};
-    Cell(unsigned short row, unsigned short column, cell_type type);
-    unsigned short row_;
-    unsigned short column_;
-    cell_type type_;
+    static const bool WHITE = true;
+    static const bool BLACK = false;
 
+    Cell(bool type = WHITE, bool surrounded = false);
+
+    bool type_ = WHITE;
+    bool surrounded_ = false;
 
 };
+
+typedef pair<unsigned short, unsigned short> cellpos;
+typedef map<cellpos, Cell> cellmap;
+
 
 #endif // CELL_H

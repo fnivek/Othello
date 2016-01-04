@@ -54,11 +54,11 @@ void Board::RenderPainter()
 
     painter.drawLines(lines);
 
-    // Draw Game pieces
-    for(auto p : gs_.pieces_)
+    // Draw Game cells
+    for(auto p : gs_.cells_)
     {
-        QRectF rec(x_diff * p.row_, y_diff * p.column_, x_diff, y_diff);
-        if(p.type_ == Cell::WHITE)
+        QRectF rec(x_diff * p.first.first, y_diff * p.first.second, x_diff, y_diff);
+        if(p.second.type_ == Cell::WHITE)
         {
             painter.setBrush(QBrush(Qt::white));
         }

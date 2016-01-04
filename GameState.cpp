@@ -4,17 +4,17 @@ GameState::GameState()
 {
 }
 
-GameState::GameState(vector<Cell> &pieces, bool player):
-    pieces_(pieces),
+GameState::GameState(cellmap cells, bool player):
+    cells_(cells),
     player_(player)
 {
 
 }
 
 
-void GameState::SetPieces(vector<Cell>& pieces)
+void GameState::SetCells(cellmap cells)
 {
-    pieces_ = pieces;
+    cells_ = cells;
 }
 
 void GameState::SetPlayer(bool player)

@@ -1,7 +1,6 @@
 #include "Cell.h"
 
-Cell::Cell(unsigned short row, unsigned short column, cell_type type):
-    row_(row),
-    column_(column),
-    type_(type)
+Cell::Cell(bool type, bool surrounded):
+    type_(type),
+    surrounded_(surrounded)
 {}
