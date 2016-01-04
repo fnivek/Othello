@@ -6,6 +6,8 @@
 #include <QLabel>
 
 #include <set>
+#include <array>
+#include <iostream>
 
 #include "Board.h"
 #include "Cell.h"
@@ -27,15 +29,25 @@ private:
 
     cellmap pieces_;
 
+    cellposset playable_cells_;
+
     bool player_ = GameState::BLACK_PLAYER;
+
+    static const array<array<short, 2>, 4> CARDINAL_DIRS;
+
+    static const array<array<short, 2>, 8> ALL_DIRS;
 
     void InitilizeCells();
 
     void UpdateBoard();
 
-    cellposset GetPlayableCells();
+    cellposset GetPlayableCells(bool player);
 
+    void PlacePiece(cellpos pos);
 
+    bool isValidDir(cellpos pos, array<short, 2> dir, bool player);
+
+    bool isCellposOnBoard(cellpos pos);
 
 
 public slots:
