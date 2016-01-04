@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include <map>
+#include <set>
 #include <utility>
 
 using namespace std;
@@ -21,6 +22,7 @@ public:
 };
 
 typedef pair<unsigned short, unsigned short> cellpos;
+typedef set<cellpos> cellposset;
 typedef map<cellpos, Cell> cellmap;
 
 

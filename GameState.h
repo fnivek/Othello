@@ -1,8 +1,6 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <map>
-
 #include "Cell.h"
 
 using namespace std;
@@ -15,12 +13,13 @@ public:
 
 public:
     GameState();
-    GameState(cellmap cells, bool player);
+    GameState(cellmap pieces, cellposset playablecells, bool player);
 
-    void SetCells(cellmap cells);
+    void SetCells(cellmap pieces);
     void SetPlayer(bool player);
 
-    cellmap cells_;
+    cellmap pieces_;
+    cellposset playablecells_;
     bool player_ = WHITE_PLAYER;
 };
 

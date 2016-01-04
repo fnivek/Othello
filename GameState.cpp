@@ -4,17 +4,16 @@ GameState::GameState()
 {
 }
 
-GameState::GameState(cellmap cells, bool player):
-    cells_(cells),
+GameState::GameState(cellmap pieces, cellposset playablecells, bool player):
+    pieces_(pieces),
+    playablecells_(playablecells),
     player_(player)
+{}
+
+
+void GameState::SetCells(cellmap pieces)
 {
-
-}
-
-
-void GameState::SetCells(cellmap cells)
-{
-    cells_ = cells;
+    pieces_ = pieces;
 }
 
 void GameState::SetPlayer(bool player)

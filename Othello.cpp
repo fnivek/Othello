@@ -28,22 +28,29 @@ void Othello::InitilizeCells()
 {
     // Set center four pieces
     unsigned short p = (board_size_ / 2) - 1;
-    cells_.insert({{p,      p},     Cell{Cell::WHITE}});
-    cells_.insert({{p+1,    p},     Cell{Cell::BLACK}});
-    cells_.insert({{p,      p+1},   Cell{Cell::BLACK}});
-    cells_.insert({{p+1,    p+1},   Cell{Cell::WHITE}});
+    pieces_.insert({{p,      p},     Cell{Cell::WHITE}});
+    pieces_.insert({{p+1,    p},     Cell{Cell::BLACK}});
+    pieces_.insert({{p,      p+1},   Cell{Cell::BLACK}});
+    pieces_.insert({{p+1,    p+1},   Cell{Cell::WHITE}});
 }
 
 void Othello::UpdateBoard()
 {
-    board_->ModelUpdated(GameState(cells_, player_));
+    board_->ModelUpdated(GameState(pieces_, GetPlayableCells(), player_));
 }
 
 void Othello::BoardClicked(cellpos pos)
 {
-    cells_.insert({{pos.first, pos.second}, Cell{player_}});
+    pieces_.insert({{pos.first, pos.second}, Cell{player_}});
 
     player_ = !player_;
 
     UpdateBoard();
+}
+
+cellposset Othello::GetPlayableCells()
+{
+    auto cells = cellposset();
+    cells.insert({1,1});
+    return cells;
 }

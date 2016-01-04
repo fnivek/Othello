@@ -54,8 +54,8 @@ void Board::RenderPainter()
 
     painter.drawLines(lines);
 
-    // Draw Game cells
-    for(auto p : gs_.cells_)
+    // Draw Game pieces
+    for(auto&& p : gs_.pieces_)
     {
         QRectF rec(x_diff * p.first.second, y_diff * p.first.first, x_diff, y_diff);
         if(p.second.type_ == Cell::WHITE)
@@ -68,6 +68,14 @@ void Board::RenderPainter()
         }
 
         painter.drawEllipse(rec);
+    }
+
+    // Draw playable cells
+    painter.setBrush(Qt::yellow);
+    for( auto&& c : gs_.playablecells_)
+    {
+        QRectF rec(x_diff * c.second, y_diff * c.first, x_diff, y_diff);
+        painter.drawRect(rec);
     }
 }
 

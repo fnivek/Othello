@@ -6,7 +6,6 @@
 #include <QLabel>
 
 #include <set>
-#include <iostream>
 
 #include "Board.h"
 #include "Cell.h"
@@ -26,13 +25,18 @@ private:
     unsigned short board_size_ = 8;
     Board* board_;
 
-    cellmap cells_;
+    cellmap pieces_;
+
+    bool player_ = GameState::BLACK_PLAYER;
 
     void InitilizeCells();
 
     void UpdateBoard();
 
-    bool player_ = GameState::BLACK_PLAYER;
+    cellposset GetPlayableCells();
+
+
+
 
 public slots:
     void BoardClicked(cellpos pos);
