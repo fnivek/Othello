@@ -7,7 +7,7 @@
 #include <set>
 #include <array>
 
-#include "SimpleView.h"
+#include "BaseView.h"
 #include "Cell.h"
 #include "GameState.h"
 
@@ -23,7 +23,7 @@ public:
 
 private:
     unsigned short board_size_ = 8;
-    SimpleView* view_;
+    BaseView* view_;
 
     cellmap pieces_;
 

@@ -12,7 +12,7 @@ const array<celldir, 8> Othello::ALL_DIRS{{
 
 Othello::Othello(QWidget *parent)
     : QWidget(parent),
-      view_(new SimpleView)
+      view_(new BaseView)
 {
     // Place Widgets in a layout
     QVBoxLayout *layout = new QVBoxLayout;

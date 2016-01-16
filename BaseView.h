@@ -1,5 +1,5 @@
-#ifndef SIMPLEVIEW_H
-#define SIMPLEVIEW_H
+#ifndef BASEVIEW_H
+#define BASEVIEW_H
 
 #include <QWidget>
 #include <QVBoxLayout>
@@ -9,11 +9,11 @@
 #include "Board.h"
 #include "GameState.h"
 
-class SimpleView : public QWidget
+class BaseView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SimpleView(QWidget *parent = 0);
+    explicit BaseView(QWidget *parent = 0);
 
     void ModelUpdated(GameState gs);
 
@@ -29,4 +29,4 @@ public slots:
     
 };
 
-#endif // SIMPLEVIEW_H
+#endif // BASEVIEW_H

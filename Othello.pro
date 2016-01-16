@@ -17,12 +17,12 @@ SOURCES += main.cpp\
     Board.cpp \
     Cell.cpp \
     GameState.cpp \
-    SimpleView.cpp
+    BaseView.cpp
 
 HEADERS  += Othello.h \
     Board.h \
     Cell.h \
     GameState.h \
-    SimpleView.h
+    BaseView.h
 
 CONFIG += c++11

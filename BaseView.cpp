@@ -1,6 +1,6 @@
-#include "SimpleView.h"
+#include "BaseView.h"
 
-SimpleView::SimpleView(QWidget *parent) :
+BaseView::BaseView(QWidget *parent) :
     QWidget(parent),
     board_(new Board),
     game_info_(new QLabel)
@@ -14,7 +14,7 @@ SimpleView::SimpleView(QWidget *parent) :
     connect(board_, SIGNAL(BoardClicked(cellpos)), this, SIGNAL(BoardClicked(cellpos)));
 }
 
-void SimpleView::ModelUpdated(GameState gs)
+void BaseView::ModelUpdated(GameState gs)
 {
     gs_ = gs;
     board_->ModelUpdated(gs_);
