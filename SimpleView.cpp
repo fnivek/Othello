@@ -3,31 +3,67 @@
 SimpleView::SimpleView(QWidget *parent) :
     QWidget(parent),
     board_(new Board),
-    game_info_(new QLabel)
+    game_info_(new QLabel),
+    current_screen_(new SimpleStartScreen(this))
 {
-    // Place Widgets in a layout
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(game_info_);
-    layout->addWidget(board_, 1);
-    setLayout(layout);
-
-    connect(board_, SIGNAL(BoardClicked(cellpos)), this, SIGNAL(BoardClicked(cellpos)));
+    setLayout(current_screen_->GetLayout());
 }
 
 void SimpleView::ModelUpdated(GameState gs)
 {
-    gs_ = gs;
-    board_->ModelUpdated(gs_);
-
-    if(gs_.player_ == GameState::WHITE_PLAYER)
-        game_info_->setText("White players turn");
-    else
-        game_info_->setText("Black players turn");
-
-    // Check if gameover
-    if(gs_.isGameOver())
+    std::cout << "New game state\n";
+    if(gs.current_screen_ != current_screen_->GetType())
     {
-        game_info_->setText("Game Over");
+        std::cout << "Different screen\n";
+        // Close previous screen
+        CloseScreen();
+
+        // Open new screen
+        switch(gs.current_screen_)
+        {
+        case GameState::START:
+            current_screen_ = new SimpleStartScreen(this);
+            break;
+        case GameState::SINGLE:
+            break;
+        case GameState::HOTSEAT:
+            std::cout << "Hoatseat screen\n";
+            current_screen_ = new SimpleHotseatScreen(this, board_);
+            break;
+        case GameState::ONLINE:
+            break;
+        case GameState::GAME_OVER:
+            break;
+        }
+
+        // Set the layout
+        setLayout(current_screen_->GetLayout());
     }
-    update();
+
+    if(current_screen_->Update(gs))
+    {
+        update();
+    }
+
+}
+
+void SimpleView::CloseScreen()
+{
+    // Get current layout
+    QLayout* layout = this->layout();
+
+    if(layout == nullptr)
+    {
+        return;
+    }
+
+    // Grab shared resources
+    layout->removeWidget(board_);
+    board_->hide();
+
+    delete layout;
+    layout = nullptr;
+
+    delete current_screen_;
+    current_screen_ = nullptr;
 }

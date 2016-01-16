@@ -105,7 +105,7 @@ void Board::SetBoardSize(unsigned short size)
     board_size_ = size;
 }
 
-void Board::ModelUpdated(GameState gs)
+void Board::ModelUpdated(GameState& gs)
 {
     gs_ = gs;
     update();

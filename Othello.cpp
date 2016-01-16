@@ -29,6 +29,7 @@ Othello::Othello(QWidget *parent)
 
     // Connect signals and slots
     connect(view_, SIGNAL(BoardClicked(cellpos)), this, SLOT(BoardClicked(cellpos)));
+    connect(view_, SIGNAL(HotseatClicked()), this, SLOT(HotseatClicked()));
 }
 
 Othello::~Othello()
@@ -38,6 +39,8 @@ Othello::~Othello()
 
 void Othello::InitilizeCells()
 {
+    pieces_.clear();
+
     // Set center four pieces
     unsigned short p = (board_size_ / 2) - 1;
     pieces_.insert({{p,      p},     Cell{Cell::WHITE}});
@@ -48,7 +51,7 @@ void Othello::InitilizeCells()
 
 void Othello::UpdateBoard()
 {
-    view_->ModelUpdated(GameState(pieces_, playable_cells_, player_));
+    view_->ModelUpdated(GameState(pieces_, playable_cells_, player_, current_screen_));
 }
 
 void Othello::BoardClicked(cellpos pos)
@@ -228,4 +231,10 @@ void Othello::FlipPieces(cellpos pos, bool player)
             }
         }
     }
+}
+
+void Othello::HotseatClicked()
+{
+    current_screen_ = GameState::HOTSEAT;
+    UpdateBoard();
 }

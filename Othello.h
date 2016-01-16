@@ -29,6 +29,8 @@ private:
 
     cellposset playable_cells_;
 
+    GameState::screen_type current_screen_ = GameState::START;
+
     bool player_ = GameState::BLACK_PLAYER;
 
     static const array<celldir, 4> CARDINAL_DIRS;
@@ -52,6 +54,8 @@ private:
 
 public slots:
     void BoardClicked(cellpos pos);
+
+    void HotseatClicked();
 
 
 };

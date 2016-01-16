@@ -4,10 +4,11 @@ GameState::GameState()
 {
 }
 
-GameState::GameState(cellmap pieces, cellposset playablecells, bool player):
+GameState::GameState(cellmap pieces, cellposset playablecells, bool player, screen_type current_screen):
     pieces_(pieces),
     playablecells_(playablecells),
-    player_(player)
+    player_(player),
+    current_screen_(current_screen)
 {}
 
 

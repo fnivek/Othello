@@ -4,10 +4,17 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton>
+#include <QApplication>
+
+#include <iostream>
 
 #include "Cell.h"
 #include "Board.h"
 #include "GameState.h"
+#include "Screen.h"
+#include "SimpleStartScreen.h"
+#include "SimpleHotseatScreen.h"
 
 class SimpleView : public QWidget
 {
@@ -19,11 +26,19 @@ public:
 
 private:
     Board* board_;
-    GameState gs_;
     QLabel* game_info_;
+    Screen* current_screen_ = nullptr;
+
+    // Functions
+
+    /*
+     * Close any screen
+     */
+    void CloseScreen();
     
 signals:
     void BoardClicked(cellpos);
+    void HotseatClicked();
     
 public slots:
     

@@ -24,7 +24,7 @@ public:
     void SetBoardSize(unsigned short size);
 
     // Model
-    void ModelUpdated(GameState gs);
+    void ModelUpdated(GameState& gs);
 
 private:
     // Graphics
