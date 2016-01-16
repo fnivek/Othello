@@ -53,6 +53,8 @@ private:
 public slots:
     void BoardClicked(cellpos pos);
 
+    void HotseatClicked();
+
 
 };
 

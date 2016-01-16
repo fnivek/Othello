@@ -3,11 +3,12 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QLabel>
+#include <QLayout>
 
 #include "Cell.h"
-#include "Board.h"
 #include "GameState.h"
+#include "BaseScreen.h"
+#include "SimpleStartScreen.h"
 
 class BaseView : public QWidget
 {
@@ -17,10 +18,10 @@ public:
 
     void ModelUpdated(GameState gs);
 
-private:
-    Board* board_;
+protected:
     GameState gs_;
-    QLabel* game_info_;
+    BaseScreen* current_screen_;
+    QLayout* layout_;
     
 signals:
     void BoardClicked(cellpos);

@@ -12,7 +12,7 @@ const array<celldir, 8> Othello::ALL_DIRS{{
 
 Othello::Othello(QWidget *parent)
     : QWidget(parent),
-      view_(new BaseView)
+      view_(new BaseView(this))
 {
     // Place Widgets in a layout
     QVBoxLayout *layout = new QVBoxLayout;
@@ -228,4 +228,10 @@ void Othello::FlipPieces(cellpos pos, bool player)
             }
         }
     }
+}
+
+
+void Othello::HotseatClicked()
+{
+
 }
